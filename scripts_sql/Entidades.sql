@@ -67,10 +67,9 @@ CREATE TABLE RUTA (
 --tabla centro_control (Independiente)
 CREATE TABLE centro_control (
     id_centro SMALLSERIAL
+        CONSTRAINT pk_cntr_cntrl_id_cntr PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     ubicacion VARCHAR(100) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
     horario_operacion VARCHAR(19) NOT NULL,
-    PRIMARY KEY (id_centro),
-
 );
