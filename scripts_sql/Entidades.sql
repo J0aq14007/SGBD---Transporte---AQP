@@ -63,3 +63,14 @@ CREATE TABLE RUTA (
     CONSTRAINT FK_ruta_empresa FOREIGN KEY (id_empresa) 
         REFERENCES EMPRESA_TRANSPORTE(id_empresa)
 );
+
+--tabla centro_control (Independiente)
+CREATE TABLE centro_control (
+    id_centro SMALLSERIAL
+    nombre VARCHAR(100) NOT NULL,
+    ubicacion VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15) NOT NULL,
+    horario_operacion VARCHAR(19) NOT NULL,
+    PRIMARY KEY (id_centro),
+
+);
