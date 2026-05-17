@@ -184,3 +184,20 @@ CREATE TABLE incidencia (
         FOREIGN KEY (id_pasajero)
         REFERENCES pasajero(id_pasajero)
 );
+
+CREATE TABLE registro_control (
+    id_registro SMALLSERIAL
+        CONSTRAINT pk_rgstr_cntrl_id_rgstr PRIMARY KEY,
+    id_bus SMALLSERIAL NOT NULL,
+    id_centro SMALLSERIAL NOT NULL,
+    fecha_hora TIMESTAMP NOT NULL,
+    retraso_minutos SMALLSERIAL NOT NULL,
+    observacion TEXT NOT NULL,
+
+    CONSTRAINT fk_registro_control_id_centro
+        FOREIGN KEY (id_centro)
+        REFERENCES centro_control(id_centro)
+    CONSTRAINT fk_rgstr_cntrl_id_bus
+        FOREIGN KEY (id_bus)
+        REFERENCES bus (id_bus)
+);
