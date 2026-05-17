@@ -82,3 +82,16 @@ CREATE TABLE pasajero (
     correo VARCHAR(100) NOT NULL,
     telefono VARCHAR(15) NOT NOT,
 );
+
+-- tabla conductor (Independiente)
+CREATE TABLE conductor (
+    id_conductor SMALLSERIAL,
+    nombres VARCHAR(100) NOT NULL,
+    licencia VARCHAR(20) NOT NULL,
+    telefono VARCHAR(15),
+    fecha_ingreso DATE NOT NULL,
+    PRIMARY KEY (id_conductor),
+    CONSTRAINT uk_conductor_licencia UNIQUE (licencia)
+);
+
+CREATE TABLE 
