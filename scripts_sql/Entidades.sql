@@ -73,3 +73,12 @@ CREATE TABLE centro_control (
     telefono VARCHAR(15) NOT NULL,
     horario_operacion VARCHAR(19) NOT NULL,
 );
+
+--tabla pasajero (Independinte)
+CREATE TABLE pasajero (
+    id_pasajero SERIAL
+        CONSTRAINT pk_psjr_id_psjr PRIMARY KEY,
+    nombres VARCHAR(50) NOT NULL,
+    correo VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15) NOT NOT,
+);
