@@ -85,3 +85,12 @@ CREATE TABLE conductor (
     PRIMARY KEY (id_conductor),
     CONSTRAINT uk_conductor_licencia UNIQUE (licencia)
 );
+
+-- tabla paradero (Independiente)
+CREATE TABLE paradero (
+    id_paradero SMALLSERIAL,
+    nombre VARCHAR(100) NOT NULL,
+    direccion VARCHAR(200) NOT NULL,
+    referencia VARCHAR(200),
+    PRIMARY KEY (id_paradero)
+);
