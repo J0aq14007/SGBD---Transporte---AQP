@@ -123,3 +123,20 @@ CREATE TABLE horario (
         FOREIGN KEY (id_ruta)
         REFERENCES ruta(id_ruta)
 );
+
+-- tabla asignacion_conductor (Depende de conductor y bus)
+CREATE TABLE asignacion_conductor (
+    id_asignacion SMALLSERIAL,
+    fecha_asignacion DATE NOT NULL,
+    turno VARCHAR(20) NOT NULL,
+    estado VARCHAR(20) NOT NULL,
+    id_conductor INT NOT NULL,
+    id_bus INT NOT NULL,
+    PRIMARY KEY (id_asignacion),
+    CONSTRAINT fk_asignacion_conductor
+        FOREIGN KEY (id_conductor)
+        REFERENCES conductor(id_conductor),
+    CONSTRAINT fk_asignacion_bus
+        FOREIGN KEY (id_bus)
+        REFERENCES bus(id_bus)
+);
