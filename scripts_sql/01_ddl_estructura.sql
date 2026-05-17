@@ -179,10 +179,12 @@ CREATE TABLE incidencia (
     CONSTRAINT fk_ncdnc_id_cntr
         FOREIGN KEY (id_centro)
         REFERENCES centro_control(id_centro),
-
     CONSTRAINT fk_ncdnc_id_psjr
         FOREIGN KEY (id_pasajero)
         REFERENCES pasajero(id_pasajero)
+    CONSTRAINT fk_ncdnc_id_bus
+        FOREIGN KEY (id_bus)
+        REFERENCES bus(id_bus)
 );
 
 CREATE TABLE registro_control (
@@ -194,7 +196,7 @@ CREATE TABLE registro_control (
     retraso_minutos SMALLSERIAL NOT NULL,
     observacion TEXT NOT NULL,
 
-    CONSTRAINT fk_registro_control_id_centro
+    CONSTRAINT fk_rgstr_cntrl_id_cntr
         FOREIGN KEY (id_centro)
         REFERENCES centro_control(id_centro)
     CONSTRAINT fk_rgstr_cntrl_id_bus
