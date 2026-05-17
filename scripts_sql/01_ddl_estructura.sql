@@ -110,3 +110,16 @@ CREATE TABLE recorrido_ruta (
         FOREIGN KEY (id_paradero)
         REFERENCES paradero(id_paradero)
 );
+
+-- tabla horario (Depende de ruta)
+CREATE TABLE horario (
+    id_horario SMALLSERIAL,
+    hora_salida TIME NOT NULL,
+    hora_llegada TIME NOT NULL,
+    frecuencia INTERVAL,
+    id_ruta INT NOT NULL,
+    PRIMARY KEY (id_horario),
+    CONSTRAINT fk_horario_ruta
+        FOREIGN KEY (id_ruta)
+        REFERENCES ruta(id_ruta)
+);
