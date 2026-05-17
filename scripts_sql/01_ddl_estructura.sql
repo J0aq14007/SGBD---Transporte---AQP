@@ -74,3 +74,14 @@ CREATE TABLE centro_control (
     PRIMARY KEY (id_centro),
 
 );
+
+-- tabla conductor (Independiente)
+CREATE TABLE conductor (
+    id_conductor SMALLSERIAL,
+    nombres VARCHAR(100) NOT NULL,
+    licencia VARCHAR(20) NOT NULL,
+    telefono VARCHAR(15),
+    fecha_ingreso DATE NOT NULL,
+    PRIMARY KEY (id_conductor),
+    CONSTRAINT uk_conductor_licencia UNIQUE (licencia)
+);
