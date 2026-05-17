@@ -94,4 +94,20 @@ CREATE TABLE conductor (
     CONSTRAINT uk_conductor_licencia UNIQUE (licencia)
 );
 
-CREATE TABLE 
+CREATE TABLE notificacion (
+    id_notificacion SERIAL
+        CONSTRAINT pk_ntfccn_id_ntfccn PRIMARY KEY,
+    id_centro SMALLSERIAL NOT NULL,
+    id_pasajero SMALLSERIAL NOT NULL,
+    mensaje TEXT NOT NULL,
+    fecha_envio TIMESTAMP NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+
+    CONSTRAINT fk_ntfccn_id_cntr
+        FOREIGN KEY (id_centro)
+        REFERENCES centro_control(id_centro),
+
+    CONSTRAINT fk_ntfccn_id_psjr
+        FOREIGN KEY (id_pasajero)
+        REFERENCES pasajero(id_pasajero)
+);
