@@ -111,3 +111,76 @@ CREATE TABLE notificacion (
         FOREIGN KEY (id_pasajero)
         REFERENCES pasajero(id_pasajero)
 );
+-- tabla paradero (Independiente)
+CREATE TABLE paradero (
+    id_paradero SMALLSERIAL,
+    nombre VARCHAR(100) NOT NULL,
+    direccion VARCHAR(200) NOT NULL,
+    referencia VARCHAR(200),
+    PRIMARY KEY (id_paradero)
+);
+
+-- tabla recorrido_ruta (Depende de ruta y paradero)
+CREATE TABLE recorrido_ruta (
+    id_recorrido SMALLSERIAL,
+    orden_paradero INT NOT NULL,
+    tiempo_llegada_estimado INTERVAL,
+    id_ruta INT NOT NULL,
+    id_paradero INT NOT NULL,
+    PRIMARY KEY (id_recorrido),
+    CONSTRAINT fk_recorrido_ruta
+        FOREIGN KEY (id_ruta)
+        REFERENCES ruta(id_ruta),
+    CONSTRAINT fk_recorrido_paradero
+        FOREIGN KEY (id_paradero)
+        REFERENCES paradero(id_paradero)
+);
+
+-- tabla horario (Depende de ruta)
+CREATE TABLE horario (
+    id_horario SMALLSERIAL,
+    hora_salida TIME NOT NULL,
+    hora_llegada TIME NOT NULL,
+    frecuencia INTERVAL,
+    id_ruta INT NOT NULL,
+    PRIMARY KEY (id_horario),
+    CONSTRAINT fk_horario_ruta
+        FOREIGN KEY (id_ruta)
+        REFERENCES ruta(id_ruta)
+);
+
+-- tabla asignacion_conductor (Depende de conductor y bus)
+CREATE TABLE asignacion_conductor (
+    id_asignacion SMALLSERIAL,
+    fecha_asignacion DATE NOT NULL,
+    turno VARCHAR(20) NOT NULL,
+    estado VARCHAR(20) NOT NULL,
+    id_conductor INT NOT NULL,
+    id_bus INT NOT NULL,
+    PRIMARY KEY (id_asignacion),
+    CONSTRAINT fk_asignacion_conductor
+        FOREIGN KEY (id_conductor)
+        REFERENCES conductor(id_conductor),
+    CONSTRAINT fk_asignacion_bus
+        FOREIGN KEY (id_bus)
+        REFERENCES bus(id_bus)
+);
+
+CREATE TABLE incidencia (
+    id_incidencia SERIAL
+        CONSTRAINT pk_ncdnc_id_ncdnc PRIMARY KEY,
+    id_bus SMALLSERIAL NOT NULL,
+    id_centro SMALLSERIAL NOT NULL,
+    id_pasajero SMALLSERIAL NOT NULL,
+    descripcion TEXT NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    fecha_reporte TIMESTAMP NOT NULL,
+
+    CONSTRAINT fk_ncdnc_id_cntr
+        FOREIGN KEY (id_centro)
+        REFERENCES centro_control(id_centro),
+
+    CONSTRAINT fk_ncdnc_id_psjr
+        FOREIGN KEY (id_pasajero)
+        REFERENCES pasajero(id_pasajero)
+);
