@@ -94,3 +94,19 @@ CREATE TABLE paradero (
     referencia VARCHAR(200),
     PRIMARY KEY (id_paradero)
 );
+
+-- tabla recorrido_ruta (Depende de ruta y paradero)
+CREATE TABLE recorrido_ruta (
+    id_recorrido SMALLSERIAL,
+    orden_paradero INT NOT NULL,
+    tiempo_llegada_estimado INTERVAL,
+    id_ruta INT NOT NULL,
+    id_paradero INT NOT NULL,
+    PRIMARY KEY (id_recorrido),
+    CONSTRAINT fk_recorrido_ruta
+        FOREIGN KEY (id_ruta)
+        REFERENCES ruta(id_ruta),
+    CONSTRAINT fk_recorrido_paradero
+        FOREIGN KEY (id_paradero)
+        REFERENCES paradero(id_paradero)
+);
