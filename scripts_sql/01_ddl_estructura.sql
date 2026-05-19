@@ -4,7 +4,7 @@ USE  SISTEMA_DE_GESTION_DE_TRANSPORTE_AQP;
 
 -- tabla EMPRESA_TRANSPORTE (Independiente)
 CREATE TABLE EMPRESA_TRANSPORTE (
-    id_empresa INT,
+    id_empresa SMALLSERIAL,
     nombre VARCHAR(100) NOT NULL,
     ruc CHAR(11) NOT NULL,
     telefono VARCHAR(15),
@@ -15,52 +15,56 @@ CREATE TABLE EMPRESA_TRANSPORTE (
 
 --tabla TERMINAL(Independiente)
 CREATE TABLE TERMINAL (
-    id_terminal INT,
+    id_terminal SMALLSERIAL,
     nombre VARCHAR(100) NOT NULL,
-    direccion VARCHAR(200) NOT NULL,
-    distrito VARCHAR(100) NOT NULL,
-    capacidad_buses INT,
+    direccion VARCHAR(150) NOT NULL,
+    distrito VARCHAR(40) NOT NULL,
+    capacidad_buses SMALLSERIAL,
     PRIMARY KEY (id_terminal)
 );
 
 -- tabla BUS (Depende de EMPRESA_TRANSPORTE y TERMINAL)
 CREATE TABLE BUS (
-    id_bus INT,
+    id_bus SMALLSERIAL,
     placa CHAR(7) NOT NULL,
-    capacidad INT NOT NULL,
+    capacidad SMALLSERIAL NOT NULL,
     estado VARCHAR(20) NOT NULL,
-    id_empresa INT,
-    id_terminal INT,
+    id_empresa SMALLSERIAL,
+    id_terminal SMALLSERIAL,
     PRIMARY KEY (id_bus),
     CONSTRAINT UK_bus_placa UNIQUE (placa),
-    CONSTRAINT FK_bus_empresa FOREIGN KEY (id_empresa) 
+    CONSTRAINT FK_bus_empresa 
+        FOREIGN KEY (id_empresa) 
         REFERENCES EMPRESA_TRANSPORTE(id_empresa),
-    CONSTRAINT FK_bus_terminal FOREIGN KEY (id_terminal) 
+    CONSTRAINT FK_bus_terminal 
+        FOREIGN KEY (id_terminal) 
         REFERENCES TERMINAL(id_terminal)
 );
 
 --tabla UBICACION_BUS (Depende de BUS)
 CREATE TABLE UBICACION_BUS (
-    id_ubicacion INT ,
+    id_ubicacion SMALLSERIAL,
     latitud DECIMAL(9,6) NOT NULL,
     longitud DECIMAL(9,6) NOT NULL,
     fecha_hora DATETIME NOT NULL,
     id_bus INT,
     PRIMARY KEY (id_ubicacion),
-    CONSTRAINT FK_ubicacion_bus FOREIGN KEY (id_bus) 
+    CONSTRAINT FK_ubicacion_bus 
+        FOREIGN KEY (id_bus) 
         REFERENCES BUS(id_bus)
 );
 
 --tabla RUTA (Depende de EMPRESA_TRANSPORTE)
 CREATE TABLE RUTA (
-    id_ruta INT,
+    id_ruta SERIAL,
     nombre_ruta VARCHAR(100) NOT NULL,
     codigo_ruta VARCHAR(10) NOT NULL,
     tiempo_estimado INT, 
-    id_empresa INT,
+    id_empresa SMALLSERIAL,
     PRIMARY KEY (id_ruta),
     CONSTRAINT UK_ruta_codigo UNIQUE (codigo_ruta),
-    CONSTRAINT FK_ruta_empresa FOREIGN KEY (id_empresa) 
+    CONSTRAINT FK_ruta_empresa 
+        FOREIGN KEY (id_empresa) 
         REFERENCES EMPRESA_TRANSPORTE(id_empresa)
 );
 
@@ -87,18 +91,19 @@ CREATE TABLE pasajero (
 CREATE TABLE conductor (
     id_conductor SMALLSERIAL,
     nombres VARCHAR(100) NOT NULL,
-    licencia VARCHAR(20) NOT NULL,
+    licencia VARCHAR(9) NOT NULL,
     telefono VARCHAR(15),
     fecha_ingreso DATE NOT NULL,
     PRIMARY KEY (id_conductor),
     CONSTRAINT uk_conductor_licencia UNIQUE (licencia)
 );
 
+
 CREATE TABLE notificacion (
     id_notificacion SERIAL
         CONSTRAINT pk_ntfccn_id_ntfccn PRIMARY KEY,
     id_centro SMALLSERIAL NOT NULL,
-    id_pasajero SMALLSERIAL NOT NULL,
+    id_pasajero SERIAL NOT NULL,
     mensaje TEXT NOT NULL,
     fecha_envio TIMESTAMP NOT NULL,
     tipo VARCHAR(50) NOT NULL,
@@ -125,8 +130,8 @@ CREATE TABLE recorrido_ruta (
     id_recorrido SMALLSERIAL,
     orden_paradero INT NOT NULL,
     tiempo_llegada_estimado INTERVAL,
-    id_ruta INT NOT NULL,
-    id_paradero INT NOT NULL,
+    id_ruta SERIAL NOT NULL,
+    id_paradero SMALLSERIAL NOT NULL,
     PRIMARY KEY (id_recorrido),
     CONSTRAINT fk_recorrido_ruta
         FOREIGN KEY (id_ruta)
@@ -142,7 +147,7 @@ CREATE TABLE horario (
     hora_salida TIME NOT NULL,
     hora_llegada TIME NOT NULL,
     frecuencia INTERVAL,
-    id_ruta INT NOT NULL,
+    id_ruta SERIAL NOT NULL,
     PRIMARY KEY (id_horario),
     CONSTRAINT fk_horario_ruta
         FOREIGN KEY (id_ruta)
@@ -155,8 +160,8 @@ CREATE TABLE asignacion_conductor (
     fecha_asignacion DATE NOT NULL,
     turno VARCHAR(20) NOT NULL,
     estado VARCHAR(20) NOT NULL,
-    id_conductor INT NOT NULL,
-    id_bus INT NOT NULL,
+    id_conductor SMALLSERIAL NOT NULL,
+    id_bus SMALLSERIAL NOT NULL,
     PRIMARY KEY (id_asignacion),
     CONSTRAINT fk_asignacion_conductor
         FOREIGN KEY (id_conductor)
