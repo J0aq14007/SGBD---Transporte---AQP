@@ -1,6 +1,4 @@
 CREATE DATABASE SISTEMA_DE_GESTION_DE_TRANSPORTE_AQP;
-USE  SISTEMA_DE_GESTION_DE_TRANSPORTE_AQP;
-
 
 -- tabla EMPRESA_TRANSPORTE (Independiente)
 CREATE TABLE EMPRESA_TRANSPORTE (
@@ -19,7 +17,7 @@ CREATE TABLE TERMINAL (
     nombre VARCHAR(100) NOT NULL,
     direccion VARCHAR(150) NOT NULL,
     distrito VARCHAR(40) NOT NULL,
-    capacidad_buses SMALLSERIAL,
+    capacidad_buses SMALLINT,
     PRIMARY KEY (id_terminal)
 );
 
@@ -46,8 +44,8 @@ CREATE TABLE UBICACION_BUS (
     id_ubicacion SMALLSERIAL,
     latitud DECIMAL(9,6) NOT NULL,
     longitud DECIMAL(9,6) NOT NULL,
-    fecha_hora DATETIME NOT NULL,
-    id_bus INT,
+    fecha_hora TIMESTAMP NOT NULL,
+    id_bus SMALLINT,
     PRIMARY KEY (id_ubicacion),
     CONSTRAINT FK_ubicacion_bus 
         FOREIGN KEY (id_bus) 
@@ -75,7 +73,7 @@ CREATE TABLE centro_control (
     nombre VARCHAR(100) NOT NULL,
     ubicacion VARCHAR(100) NOT NULL,
     telefono VARCHAR(15) NOT NULL,
-    horario_operacion VARCHAR(19) NOT NULL,
+    horario_operacion VARCHAR(19) NOT NULL
 );
 
 --tabla pasajero (Independinte)
@@ -84,7 +82,7 @@ CREATE TABLE pasajero (
         CONSTRAINT pk_psjr_id_psjr PRIMARY KEY,
     nombres VARCHAR(50) NOT NULL,
     correo VARCHAR(100) NOT NULL,
-    telefono VARCHAR(15) NOT NOT,
+    telefono VARCHAR(15) NOT NULL
 );
 
 -- tabla conductor (Independiente)
@@ -98,7 +96,7 @@ CREATE TABLE conductor (
     CONSTRAINT uk_conductor_licencia UNIQUE (licencia)
 );
 
-
+--tabla notificacion (Depende de centro_control y pasajero)
 CREATE TABLE notificacion (
     id_notificacion SERIAL
         CONSTRAINT pk_ntfccn_id_ntfccn PRIMARY KEY,
@@ -171,6 +169,7 @@ CREATE TABLE asignacion_conductor (
         REFERENCES bus(id_bus)
 );
 
+--tabla incidencia (Depende de centro_control, pasajero y bus)
 CREATE TABLE incidencia (
     id_incidencia SERIAL
         CONSTRAINT pk_ncdnc_id_ncdnc PRIMARY KEY,
@@ -186,12 +185,13 @@ CREATE TABLE incidencia (
         REFERENCES centro_control(id_centro),
     CONSTRAINT fk_ncdnc_id_psjr
         FOREIGN KEY (id_pasajero)
-        REFERENCES pasajero(id_pasajero)
+        REFERENCES pasajero(id_pasajero),
     CONSTRAINT fk_ncdnc_id_bus
         FOREIGN KEY (id_bus)
         REFERENCES bus(id_bus)
 );
 
+--tabla registro_control (Depende de bus y centro_control)
 CREATE TABLE registro_control (
     id_registro SMALLSERIAL
         CONSTRAINT pk_rgstr_cntrl_id_rgstr PRIMARY KEY,
@@ -203,7 +203,7 @@ CREATE TABLE registro_control (
 
     CONSTRAINT fk_rgstr_cntrl_id_cntr
         FOREIGN KEY (id_centro)
-        REFERENCES centro_control(id_centro)
+        REFERENCES centro_control(id_centro),
     CONSTRAINT fk_rgstr_cntrl_id_bus
         FOREIGN KEY (id_bus)
         REFERENCES bus (id_bus)
