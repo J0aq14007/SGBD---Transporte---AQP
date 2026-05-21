@@ -10,3 +10,11 @@ INSERT INTO EMPRESA_TRANSPORTE (nombre, ruc, telefono, correo) VALUES
 --tabla  2:TERMINAL
 INSERT INTO TERMINAL (nombre, direccion, distrito, capacidad_buses) VALUES
 ('Terminal Norte', 'Av. Sol 123', 'Paucarpata', 40),
+
+-- tabla conductor
+INSERT INTO conductor(nombres, licencia, telefono, fecha_ingreso)
+VALUES('Manuel Perez', 'Q32453286', '913653286', '2025-02-03');
+
+--tabla paradero
+INSERT INTO paradero(nombre, direccion, referencia)
+VALUES('Paradero UNSA', 'Av. Independencia 500', 'Puerta principal de la UNSA');
