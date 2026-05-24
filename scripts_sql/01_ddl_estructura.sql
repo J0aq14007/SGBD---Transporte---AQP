@@ -1,7 +1,7 @@
 CREATE DATABASE SISTEMA_DE_GESTION_DE_TRANSPORTE_AQP;
 
--- tabla EMPRESA_TRANSPORTE (Independiente)
-CREATE TABLE EMPRESA_TRANSPORTE (
+-- tabla empresa_transporte (Independiente)
+CREATE TABLE empresa_transporte (
     id_empresa SMALLSERIAL,
     nombre VARCHAR(100) NOT NULL,
     ruc CHAR(11) NOT NULL,
@@ -11,8 +11,8 @@ CREATE TABLE EMPRESA_TRANSPORTE (
     CONSTRAINT UK_empresa_ruc UNIQUE (ruc)
 );
 
---tabla TERMINAL(Independiente)
-CREATE TABLE TERMINAL (
+--tabla terminal (Independiente)
+CREATE TABLE terminal (
     id_terminal SMALLSERIAL,
     nombre VARCHAR(100) NOT NULL,
     direccion VARCHAR(150) NOT NULL,
@@ -21,14 +21,14 @@ CREATE TABLE TERMINAL (
     PRIMARY KEY (id_terminal)
 );
 
--- tabla BUS (Depende de EMPRESA_TRANSPORTE y TERMINAL)
-CREATE TABLE BUS (
+-- tabla bus (Depende de empresa_transporte y terminal)
+CREATE TABLE bus (
     id_bus SMALLSERIAL,
     placa CHAR(7) NOT NULL,
-    capacidad SMALLSERIAL NOT NULL,
+    capacidad SMALLINT NOT NULL,
     estado VARCHAR(20) NOT NULL,
-    id_empresa SMALLSERIAL,
-    id_terminal SMALLSERIAL,
+    id_empresa SMALLINT,
+    id_terminal SMALLINT,
     PRIMARY KEY (id_bus),
     CONSTRAINT UK_bus_placa UNIQUE (placa),
     CONSTRAINT FK_bus_empresa 
@@ -39,8 +39,8 @@ CREATE TABLE BUS (
         REFERENCES TERMINAL(id_terminal)
 );
 
---tabla UBICACION_BUS (Depende de BUS)
-CREATE TABLE UBICACION_BUS (
+--tabla ubicacion_bus (Depende de bus)
+CREATE TABLE ubicacion_bus (
     id_ubicacion SMALLSERIAL,
     latitud DECIMAL(9,6) NOT NULL,
     longitud DECIMAL(9,6) NOT NULL,
@@ -52,13 +52,13 @@ CREATE TABLE UBICACION_BUS (
         REFERENCES BUS(id_bus)
 );
 
---tabla RUTA (Depende de EMPRESA_TRANSPORTE)
-CREATE TABLE RUTA (
+--tabla ruta (Depende de empresa_transporte)
+CREATE TABLE ruta (
     id_ruta SERIAL,
     nombre_ruta VARCHAR(100) NOT NULL,
     codigo_ruta VARCHAR(10) NOT NULL,
     tiempo_estimado INT, 
-    id_empresa SMALLSERIAL,
+    id_empresa SMALLINT,
     PRIMARY KEY (id_ruta),
     CONSTRAINT UK_ruta_codigo UNIQUE (codigo_ruta),
     CONSTRAINT FK_ruta_empresa 
@@ -82,7 +82,6 @@ CREATE TABLE pasajero (
         CONSTRAINT pk_psjr_id_psjr PRIMARY KEY,
     nombres VARCHAR(50) NOT NULL,
     correo VARCHAR(100) NOT NULL,
-    telefono VARCHAR(15) NOT NULL,
     telefono VARCHAR(15) NOT NULL
 );
 
@@ -102,7 +101,7 @@ CREATE TABLE notificacion (
     id_notificacion SERIAL
         CONSTRAINT pk_ntfccn_id_ntfccn PRIMARY KEY,
     id_centro SMALLSERIAL NOT NULL,
-    id_pasajero SERIAL NOT NULL,
+    id_pasajero INT NOT NULL,
     mensaje TEXT NOT NULL,
     fecha_envio TIMESTAMP NOT NULL,
     tipo VARCHAR(50) NOT NULL,
@@ -129,7 +128,7 @@ CREATE TABLE recorrido_ruta (
     id_recorrido SMALLSERIAL,
     orden_paradero INT NOT NULL,
     tiempo_llegada_estimado INTERVAL,
-    id_ruta SERIAL NOT NULL,
+    id_ruta INT NOT NULL,
     id_paradero SMALLSERIAL NOT NULL,
     PRIMARY KEY (id_recorrido),
     CONSTRAINT fk_recorrido_ruta
@@ -146,7 +145,7 @@ CREATE TABLE horario (
     hora_salida TIME NOT NULL,
     hora_llegada TIME NOT NULL,
     frecuencia INTERVAL,
-    id_ruta SERIAL NOT NULL,
+    id_ruta INT NOT NULL,
     PRIMARY KEY (id_horario),
     CONSTRAINT fk_horario_ruta
         FOREIGN KEY (id_ruta)
@@ -159,8 +158,8 @@ CREATE TABLE asignacion_conductor (
     fecha_asignacion DATE NOT NULL,
     turno VARCHAR(20) NOT NULL,
     estado VARCHAR(20) NOT NULL,
-    id_conductor SMALLSERIAL NOT NULL,
-    id_bus SMALLSERIAL NOT NULL,
+    id_conductor SMALLINT NOT NULL,
+    id_bus SMALLINT NOT NULL,
     PRIMARY KEY (id_asignacion),
     CONSTRAINT fk_asignacion_conductor
         FOREIGN KEY (id_conductor)
@@ -174,9 +173,9 @@ CREATE TABLE asignacion_conductor (
 CREATE TABLE incidencia (
     id_incidencia SERIAL
         CONSTRAINT pk_ncdnc_id_ncdnc PRIMARY KEY,
-    id_bus SMALLSERIAL NOT NULL,
-    id_centro SMALLSERIAL NOT NULL,
-    id_pasajero SMALLSERIAL NOT NULL,
+    id_bus SMALLINT NOT NULL,
+    id_centro SMALLINT NOT NULL,
+    id_pasajero INT NOT NULL,
     descripcion TEXT NOT NULL,
     tipo VARCHAR(50) NOT NULL,
     fecha_reporte TIMESTAMP NOT NULL,
@@ -196,10 +195,10 @@ CREATE TABLE incidencia (
 CREATE TABLE registro_control (
     id_registro SMALLSERIAL
         CONSTRAINT pk_rgstr_cntrl_id_rgstr PRIMARY KEY,
-    id_bus SMALLSERIAL NOT NULL,
-    id_centro SMALLSERIAL NOT NULL,
+    id_bus SMALLINT NOT NULL,
+    id_centro SMALLINT NOT NULL,
     fecha_hora TIMESTAMP NOT NULL,
-    retraso_minutos SMALLSERIAL NOT NULL,
+    retraso_minutos SMALLINT NOT NULL,
     observacion TEXT NOT NULL,
 
     CONSTRAINT fk_rgstr_cntrl_id_cntr
