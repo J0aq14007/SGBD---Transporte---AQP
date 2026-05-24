@@ -70,6 +70,18 @@ UPDATE empresa_transporte
 SET ruc = '12312312312' 
 WHERE nombre = 'LosCanarios';
 
+--UPDATE'S DE  PASAJERO
+UPDATE pasajero 
+SET telefono = '999888777' 
+WHERE nombres = 'Lucía Torres';
+
+UPDATE pasajero 
+SET correo = 'carlos.diaz@update.com' 
+WHERE nombres = 'Carlos Díaz';
+
+UPDATE pasajero 
+SET nombres = 'María López García' 
+WHERE correo = 'maria.lopez@mail.com';
 
 
 
