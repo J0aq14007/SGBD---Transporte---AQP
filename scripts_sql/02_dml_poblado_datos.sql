@@ -1,7 +1,8 @@
 -- #TABLAS INDEPENDIENTES
 
 -- tabla  EMPRESA_TRANSPORTE
-INSERT INTO empresa_transporte(nombre, ruc, telefono, correo) VALUES
+INSERT INTO empresa_transporte(nombre, ruc, telefono, correo) 
+VALUES
 ('SantaClara', '12345678901', '987654321', 'aqpbus@SantaClara.com'),
 ('AQPMasivo', '10987654321', '912345678', 'aqpbus@AQPmasivo.com'),
 ('LosCanarios', '10293847561', '987321654', 'aqpbus@loscanarios.com'),
@@ -9,7 +10,8 @@ INSERT INTO empresa_transporte(nombre, ruc, telefono, correo) VALUES
 ('Cotum', '11987654321', '955443322', 'aqpbus@Cotum.com');
 
 --tabla  TERMINAL
-INSERT INTO terminal(nombre, direccion, distrito, capacidad_buses) VALUES
+INSERT INTO terminal(nombre, direccion, distrito, capacidad_buses) 
+VALUES
 ('Terminal Norte', 'Av. Sol 123', 'Paucarpata', 40),
 ('Terminal Sur', 'Av. Los Incas 456', 'José Luis Bustamante', 50),
 ('Terminal Centro', 'Av. La Marina 789', 'Cercado', 30),
@@ -18,7 +20,8 @@ INSERT INTO terminal(nombre, direccion, distrito, capacidad_buses) VALUES
 
 --tabla centro_control
 INSERT INTO centro_control (nombre , ubicacion, telefono, horario_operacion)
-VALUES ('Centro Cayma', 'Av Ejercito 001', '977211322', '6:00 AM - 10:00 PM'),
+VALUES 
+('Centro Cayma', 'Av Ejercito 001', '977211322', '6:00 AM - 10:00 PM'),
 ('Centro Paucarpata', 'Av. Dolores 222', '988112233', '7:00 AM - 9:00 PM'),
 ('Centro Cercado', 'Av. Goyeneche 333', '977445566', '24 horas'),
 ('Centro Socabaya', 'Av. Socabaya 444', '966778899', '5:00 AM - 11:00 PM'),
@@ -26,7 +29,8 @@ VALUES ('Centro Cayma', 'Av Ejercito 001', '977211322', '6:00 AM - 10:00 PM'),
 
 --tabla pasajero
 INSERT INTO pasajero (nombres, correo, telefono)
-VALUES ('Adriano Guetat', 'correoreal@dominioreal.com','986123543'),
+VALUES 
+('Adriano Guetat', 'correoreal@dominioreal.com','986123543'),
 ('Lucía Torres', 'lucia.torres@mail.com','987654321'),
 ('Carlos Díaz', 'carlos.diaz@mail.com','912345678'),
 ('María López', 'maria.lopez@mail.com','933221144'),
@@ -34,7 +38,8 @@ VALUES ('Adriano Guetat', 'correoreal@dominioreal.com','986123543'),
 
 --tabla conductor
 INSERT INTO conductor(nombres, licencia, telefono, fecha_ingreso)
-VALUES('Manuel Perez', 'Q32453286', '913653286', '2025-02-03');
+VALUES
+('Manuel Perez', 'Q32453286', '913653286', '2025-02-03'),
 ('Luis Torres', 'L12345678', '987654321', '2024-05-10'),
 ('Anuel Gómez', 'A87654321', '912345678', '2023-11-20'),
 ('Pedro Ramos', 'P11223344', '933221144', '2022-07-15'),
@@ -42,7 +47,8 @@ VALUES('Manuel Perez', 'Q32453286', '913653286', '2025-02-03');
 
 --tabla paradero
 INSERT INTO paradero(nombre, direccion, referencia)
-VALUES('Paradero UNSA', 'Av. Independencia 500', 'Puerta principal de la UNSA');
+VALUES
+('Paradero UNSA', 'Av. Independencia 500', 'Puerta principal de la UNSA'),
 ('Paradero PlazaVea', 'Av. Ejército 200', 'Frente a Plaza Vea Cayma'),
 ('Paradero Mall', 'Av. Kennedy 300', 'Entrada principal del Mall Aventura'),
 ('Paradero Estadio', 'Av. Independencia 400', 'Frente al Estadio Melgar'),
@@ -53,7 +59,8 @@ VALUES('Paradero UNSA', 'Av. Independencia 500', 'Puerta principal de la UNSA');
 
 --tabla ruta
 INSERT INTO ruta(nombre_ruta, codigo_ruta, tiempo_estimado, id_empresa)
-VALUES('Ruta Centro - Cayma', 'R001', 45, 1),
+VALUES
+('Ruta Centro - Cayma', 'R001', 45, 1),
 ('Ruta Paucarpata - Cercado', 'R002', 35, 2),
 ('Ruta Yanahuara - Socabaya', 'R003', 50, 3),
 ('Ruta Mariano Melgar - Centro', 'R004', 40, 4),
@@ -61,7 +68,8 @@ VALUES('Ruta Centro - Cayma', 'R001', 45, 1),
 
 --tabla bus
 INSERT INTO bus(placa, capacidad, estado, id_empresa, id_terminal)
-VALUES('V8A-123', 40, 'Activo', 1, 1),
+VALUES
+('V8A-123', 40, 'Activo', 1, 1),
 ('C7B-456', 35, 'Activo', 2, 2),
 ('M9D-789', 50, 'Mantenimiento', 3, 3),
 ('P1F-321', 45, 'Activo', 4, 4),
@@ -86,7 +94,7 @@ VALUES
 (4, 4, 'Cambio de horario', '2026-05-20 10:00:00', 'Horario'),
 (5, 5, 'Bus fuera de servicio', '2026-05-20 11:00:00', 'Incidencia');
 
--- UPDATE Y WHERE DE TABLAS
+-- #UPDATE Y WHERE DE TABLAS
 
 --UPDATE'S DE EMPRESA_TRANSPORTE
 UPDATE empresa_transporte 
