@@ -97,6 +97,14 @@ VALUES  (5-23-2026, 'Mañana', 'Vigente'),
         (5-23-2026, 'Tarde', 'Vigente'),
         (5-23-2026, 'Mañana', 'Vigente');
 
+--tabla incidencia
+INSERT INTO incidencia(descripcion,tipo,fecha_reporte)
+VALUES  ('El bus x llego tarde hoy, tenia cosas importantes que hacer', 'Retraso', '2026-05-20 15:36:00'),
+        ('El conductor del bus x conduce muy rapido', 'Exceso de velocidad', '2026-05-21 11:16:00'),
+        ('El bus x no parece recibir mantenimiento', 'Bus en mal estado', '2026-05-21 08:10:00'),
+        ('El conductor del bus x parecia estar en estado de ebriedad', 'Conductor en mal estado', '2026-05-23 10:50:00'),
+        ('El bus x choco en la avenida x', 'Choque', '2026-05-20 15:36:00');
+
 -- #UPDATE Y WHERE DE TABLAS
 --UPDATE'S DE EMPRESA_TRANSPORTE
 UPDATE empresa_transporte 
