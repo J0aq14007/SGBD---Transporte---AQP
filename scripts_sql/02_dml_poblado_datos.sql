@@ -105,6 +105,15 @@ VALUES  ('El bus x llego tarde hoy, tenia cosas importantes que hacer', 'Retraso
         ('El conductor del bus x parecia estar en estado de ebriedad', 'Conductor en mal estado', '2026-05-23 10:50:00'),
         ('El bus x choco en la avenida x', 'Choque', '2026-05-20 15:36:00');
 
+--tabla registro_control
+INSERT INTO registro_control(fecha_hora,retraso_minutos,observacion)
+VALUES  ('2026-05-20 06:59:00',-1, 'Llego temprano'),
+        ('2026-05-20 08:15:00',15, 'Se retraso por el trafico'),
+        ('2026-05-21 10:20:00',20, 'Se retraso por el cambio de ruta'),
+        ('2026-05-21 12:00:00',0, 'Llego a tiempo'),
+        ('2026-05-22 19:00:00',120, 'Choco y tuvo que regresar a la base');
+
+
 -- #UPDATE Y WHERE DE TABLAS
 --UPDATE'S DE EMPRESA_TRANSPORTE
 UPDATE empresa_transporte 
