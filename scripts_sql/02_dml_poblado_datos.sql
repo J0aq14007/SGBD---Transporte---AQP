@@ -55,6 +55,8 @@ VALUES('Paradero UNSA', 'Av. Independencia 500', 'Puerta principal de la UNSA');
 ('Paradero Estadio', 'Av. Independencia 400', 'Frente al Estadio Melgar'),
 ('Paradero Hospital', 'Av. Goyeneche 600', 'Entrada principal del Hospital Goyeneche');
 
+
+
 -- UPDATE Y WHERE DE TABLAS
 
 --UPDATE'S DE EMPRESA_TRANSPORTE
@@ -83,6 +85,18 @@ UPDATE pasajero
 SET nombres = 'María López García' 
 WHERE correo = 'maria.lopez@mail.com';
 
+--UPDATE'S DE  CONDUCTOR
+UPDATE conductor 
+SET telefono = '911222333' 
+WHERE nombres = 'Manuel Perez';
+
+UPDATE conductor 
+SET fecha_ingreso = '2025-05-01' 
+WHERE nombres = 'Luis Torres';
+
+UPDATE conductor 
+SET licencia = 'A99999999' 
+WHERE nombres = 'Anuel Gómez';
 
 
 
