@@ -39,8 +39,16 @@ VALUES ('Adriano Guetat', 'correoreal@dominioreal.com','986123543'),
 --tabla conductor
 INSERT INTO conductor(nombres, licencia, telefono, fecha_ingreso)
 VALUES('Manuel Perez', 'Q32453286', '913653286', '2025-02-03');
+('Luis Torres', 'L12345678', '987654321', '2024-05-10'),
+('Anuel Gómez', 'A87654321', '912345678', '2023-11-20'),
+('Pedro Ramos', 'P11223344', '933221144', '2022-07-15'),
+('Santiago Díaz', 'S55667788', '955667788', '2021-03-01');
 
 
 --tabla paradero
 INSERT INTO paradero(nombre, direccion, referencia)
 VALUES('Paradero UNSA', 'Av. Independencia 500', 'Puerta principal de la UNSA');
+('Paradero PlazaVea', 'Av. Ejército 200', 'Frente a Plaza Vea Cayma'),
+('Paradero Mall', 'Av. Kennedy 300', 'Entrada principal del Mall Aventura'),
+('Paradero Estadio', 'Av. Independencia 400', 'Frente al Estadio Melgar'),
+('Paradero Hospital', 'Av. Goyeneche 600', 'Entrada principal del Hospital Goyeneche');
