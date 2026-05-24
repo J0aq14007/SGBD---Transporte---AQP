@@ -107,6 +107,19 @@ UPDATE conductor
 SET licencia = 'A99999999' 
 WHERE nombres = 'Anuel Gómez';
 
+--UPDATE'S DE BUS
+UPDATE bus
+SET estado = "En base"
+WHERE placa = "A3B-210";
+
+UPDATE bus
+SET capacidad = 10
+WHERE placa = "A3B-210";
+
+UPDATE bus
+SET estado = "Partio"
+WHERE placa = "A2B-320";
+ 
 
 
 
