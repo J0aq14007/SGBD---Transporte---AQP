@@ -59,40 +59,43 @@ VALUES  ('Paradero UNSA', 'Av. Independencia 500', 'Puerta principal de la UNSA'
 
 --tabla ruta
 INSERT INTO ruta(nombre_ruta, codigo_ruta, tiempo_estimado, id_empresa)
-VALUES
-('Ruta Centro - Cayma', 'R001', 45, 1),
-('Ruta Paucarpata - Cercado', 'R002', 35, 2),
-('Ruta Yanahuara - Socabaya', 'R003', 50, 3),
-('Ruta Mariano Melgar - Centro', 'R004', 40, 4),
-('Ruta Cerro Colorado - UNSA', 'R005', 55, 5);
+VALUES  ('Ruta Centro - Cayma', 'R001', 45, 1),
+        ('Ruta Paucarpata - Cercado', 'R002', 35, 2),
+        ('Ruta Yanahuara - Socabaya', 'R003', 50, 3),
+        ('Ruta Mariano Melgar - Centro', 'R004', 40, 4),
+        ('Ruta Cerro Colorado - UNSA', 'R005', 55, 5);
 
 --tabla bus
 INSERT INTO bus(placa, capacidad, estado, id_empresa, id_terminal)
-VALUES
-('V8A-123', 40, 'Activo', 1, 1),
-('C7B-456', 35, 'Activo', 2, 2),
-('M9D-789', 50, 'Mantenimiento', 3, 3),
-('P1F-321', 45, 'Activo', 4, 4),
-('X5G-654', 30, 'Inactivo', 5, 5);
+VALUES  ('V8A-123', 40, 'Activo', 1, 1),
+        ('C7B-456', 35, 'Activo', 2, 2),
+        ('M9D-789', 50, 'Mantenimiento', 3, 3),
+        ('P1F-321', 45, 'Activo', 4, 4),
+        ('X5G-654', 30, 'Inactivo', 5, 5);
 
 --tabla horario
 INSERT INTO horario(hora_salida, hora_llegada, frecuencia, id_ruta)
-VALUES
-('06:00', '06:45', '15 minutes', 1),
-('07:00', '07:35', '20 minutes', 2),
-('08:00', '08:50', '25 minutes', 3),
-('09:00', '09:40', '30 minutes', 4),
-('10:00', '10:55', '15 minutes', 5);
+VALUES  ('06:00', '06:45', '15 minutes', 1),
+        ('07:00', '07:35', '20 minutes', 2),
+        ('08:00', '08:50', '25 minutes', 3),
+        ('09:00', '09:40', '30 minutes', 4),
+        ('10:00', '10:55', '15 minutes', 5);
 
 --tabla notificacion
-INSERT INTO notificacion
-(id_centro, id_pasajero, mensaje, fecha_envio, tipo)
-VALUES
-(1, 1, 'Retraso en la ruta R001', '2026-05-20 08:30:00', 'Retraso'),
-(2, 2, 'Desvío temporal por tráfico', '2026-05-20 09:00:00', 'Aviso'),
-(3, 3, 'Ruta restablecida', '2026-05-20 09:30:00', 'Informativo'),
-(4, 4, 'Cambio de horario', '2026-05-20 10:00:00', 'Horario'),
-(5, 5, 'Bus fuera de servicio', '2026-05-20 11:00:00', 'Incidencia');
+INSERT INTO notificacion(id_centro, id_pasajero, mensaje, fecha_envio, tipo)
+VALUES  (1, 1, 'Retraso en la ruta R001', '2026-05-20 08:30:00', 'Retraso'),
+        (2, 2, 'Desvío temporal por tráfico', '2026-05-20 09:00:00', 'Aviso'),
+        (3, 3, 'Ruta restablecida', '2026-05-20 09:30:00', 'Informativo'),
+        (4, 4, 'Cambio de horario', '2026-05-20 10:00:00', 'Horario'),
+        (5, 5, 'Bus fuera de servicio', '2026-05-20 11:00:00', 'Incidencia');
+
+--tabla asignacion conductor
+INSERT INTO asignacion_conductor(fecha_asignacion,turno,estado)
+VALUES  (5-23-2026, 'Mañana', 'Vigente'),
+        (5-23-2026, 'Tarde', 'Vigente'),
+        (5-23-2026, 'Mañana', 'Vigente'),
+        (5-23-2026, 'Tarde', 'Vigente'),
+        (5-23-2026, 'Mañana', 'Vigente');
 
 -- #UPDATE Y WHERE DE TABLAS
 --UPDATE'S DE EMPRESA_TRANSPORTE
