@@ -91,11 +91,11 @@ VALUES  (1, 1, 'Retraso en la ruta R001', '2026-05-20 08:30:00', 'Retraso'),
 
 --tabla asignacion conductor
 INSERT INTO asignacion_conductor(fecha_asignacion,turno,estado)
-VALUES  (5-23-2026, 'Mañana', 'Vigente'),
-        (5-23-2026, 'Tarde', 'Vigente'),
-        (5-23-2026, 'Mañana', 'Vigente'),
-        (5-23-2026, 'Tarde', 'Vigente'),
-        (5-23-2026, 'Mañana', 'Vigente');
+VALUES  ('2026-05-22', 'Mañana', 'Vigente'),
+        ('2026-05-22', 'Tarde', 'Vigente'),
+        ('2026-05-23', 'Mañana', 'Vigente'),
+        ('2026-05-23', 'Tarde', 'Vigente'),
+        ('2026-05-23', 'Mañana', 'Vigente');
 
 --tabla incidencia
 INSERT INTO incidencia(descripcion,tipo,fecha_reporte)
