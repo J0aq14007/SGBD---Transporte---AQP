@@ -59,6 +59,14 @@ VALUES('Ruta Centro - Cayma', 'R001', 45, 1),
 ('Ruta Mariano Melgar - Centro', 'R004', 40, 4),
 ('Ruta Cerro Colorado - UNSA', 'R005', 55, 5);
 
+--tabla bus
+INSERT INTO bus(placa, capacidad, estado, id_empresa, id_terminal)
+VALUES('V8A-123', 40, 'Activo', 1, 1),
+('C7B-456', 35, 'Activo', 2, 2),
+('M9D-789', 50, 'Mantenimiento', 3, 3),
+('P1F-321', 45, 'Activo', 4, 4),
+('X5G-654', 30, 'Inactivo', 5, 5);
+
 -- UPDATE Y WHERE DE TABLAS
 
 --UPDATE'S DE EMPRESA_TRANSPORTE
