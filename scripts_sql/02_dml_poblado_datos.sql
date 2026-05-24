@@ -1,4 +1,6 @@
 
+
+-- #TABLAS INDEPENDIENTES
 -- tabla  EMPRESA_TRANSPORTE
 INSERT INTO empresa_transporte(nombre, ruc, telefono, correo) VALUES
 ('SantaClara', '12345678901', '987654321', 'aqpbus@SantaClara.com'),
@@ -52,3 +54,25 @@ VALUES('Paradero UNSA', 'Av. Independencia 500', 'Puerta principal de la UNSA');
 ('Paradero Mall', 'Av. Kennedy 300', 'Entrada principal del Mall Aventura'),
 ('Paradero Estadio', 'Av. Independencia 400', 'Frente al Estadio Melgar'),
 ('Paradero Hospital', 'Av. Goyeneche 600', 'Entrada principal del Hospital Goyeneche');
+
+-- UPDATE Y WHERE DE TABLAS
+
+--UPDATE'S DE EMPRESA_TRANSPORTE
+UPDATE empresa_transporte 
+SET telefono = '900111222' 
+WHERE nombre = 'SantaClara';
+
+UPDATE empresa_transporte 
+SET correo = 'contacto@aqpmasivo.com' 
+WHERE nombre = 'AQPMasivo';
+
+UPDATE empresa_transporte 
+SET ruc = '12312312312' 
+WHERE nombre = 'LosCanarios';
+
+
+
+
+
+
+
