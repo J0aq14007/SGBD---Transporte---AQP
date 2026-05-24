@@ -127,7 +127,18 @@ UPDATE conductor
 SET licencia = 'A99999999' 
 WHERE nombres = 'Anuel Gómez';
 
+--UPDATE'S DE BUS
+UPDATE bus
+SET estado = 'Mantenimiento'
+WHERE placa = 'V8A-123';
 
+UPDATE bus
+SET capacidad = 45
+WHERE id_bus = 2;
+
+UPDATE bus
+SET id_terminal = 3
+WHERE placa = 'M9D-789';
 
 
 
