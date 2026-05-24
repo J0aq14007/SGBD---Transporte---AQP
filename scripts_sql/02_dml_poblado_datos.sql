@@ -167,5 +167,15 @@ UPDATE bus
 SET id_terminal = 3
 WHERE placa = 'M9D-789';
 
+--UPDATE'S DE ASIGNACION_CONDUCTOR
+UPDATE asignacion_conductor
+SET turno = 'Mañana'
+WHERE id_conductor = 2;
 
+UPDATE asignacion_conductor
+SET turno = 'Tarde'
+WHERE id_conductor = 1;
 
+UPDATE asignacion_conductor
+SET estado = 'Sin conductor'
+WHERE id_bus = 4;
