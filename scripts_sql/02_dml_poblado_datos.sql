@@ -67,6 +67,15 @@ VALUES('V8A-123', 40, 'Activo', 1, 1),
 ('P1F-321', 45, 'Activo', 4, 4),
 ('X5G-654', 30, 'Inactivo', 5, 5);
 
+--tabla horario
+INSERT INTO horario(hora_salida, hora_llegada, frecuencia, id_ruta)
+VALUES
+('06:00', '06:45', '15 minutes', 1),
+('07:00', '07:35', '20 minutes', 2),
+('08:00', '08:50', '25 minutes', 3),
+('09:00', '09:40', '30 minutes', 4),
+('10:00', '10:55', '15 minutes', 5);
+
 -- UPDATE Y WHERE DE TABLAS
 
 --UPDATE'S DE EMPRESA_TRANSPORTE
