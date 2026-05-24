@@ -76,6 +76,16 @@ VALUES
 ('09:00', '09:40', '30 minutes', 4),
 ('10:00', '10:55', '15 minutes', 5);
 
+--tabla notificacion
+INSERT INTO notificacion
+(id_centro, id_pasajero, mensaje, fecha_envio, tipo)
+VALUES
+(1, 1, 'Retraso en la ruta R001', '2026-05-20 08:30:00', 'Retraso'),
+(2, 2, 'Desvío temporal por tráfico', '2026-05-20 09:00:00', 'Aviso'),
+(3, 3, 'Ruta restablecida', '2026-05-20 09:30:00', 'Informativo'),
+(4, 4, 'Cambio de horario', '2026-05-20 10:00:00', 'Horario'),
+(5, 5, 'Bus fuera de servicio', '2026-05-20 11:00:00', 'Incidencia');
+
 -- UPDATE Y WHERE DE TABLAS
 
 --UPDATE'S DE EMPRESA_TRANSPORTE
