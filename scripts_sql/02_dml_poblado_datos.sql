@@ -90,28 +90,28 @@ VALUES  (1, 1, 'Retraso en la ruta R001', '2026-05-20 08:30:00', 'Retraso'),
         (5, 5, 'Bus fuera de servicio', '2026-05-20 11:00:00', 'Incidencia');
 
 --tabla asignacion conductor
-INSERT INTO asignacion_conductor(fecha_asignacion,turno,estado)
-VALUES  ('2026-05-22', 'Mañana', 'Vigente'),
-        ('2026-05-22', 'Tarde', 'Vigente'),
-        ('2026-05-23', 'Mañana', 'Vigente'),
-        ('2026-05-23', 'Tarde', 'Vigente'),
-        ('2026-05-23', 'Mañana', 'Vigente');
+INSERT INTO asignacion_conductor(fecha_asignacion,turno,estado,id_conductor,id_bus)
+VALUES  ('2026-05-22', 'Mañana', 'Vigente',1,1),
+        ('2026-05-22', 'Tarde', 'Vigente',2,2),
+        ('2026-05-23', 'Mañana', 'Vigente',3,3),
+        ('2026-05-23', 'Tarde', 'Vigente',4,4),
+        ('2026-05-23', 'Mañana', 'Vigente',5,5);
 
 --tabla incidencia
-INSERT INTO incidencia(descripcion,tipo,fecha_reporte)
-VALUES  ('El bus x llego tarde hoy, tenia cosas importantes que hacer', 'Retraso', '2026-05-20 15:36:00'),
-        ('El conductor del bus x conduce muy rapido', 'Exceso de velocidad', '2026-05-21 11:16:00'),
-        ('El bus x no parece recibir mantenimiento', 'Bus en mal estado', '2026-05-21 08:10:00'),
-        ('El conductor del bus x parecia estar en estado de ebriedad', 'Conductor en mal estado', '2026-05-23 10:50:00'),
-        ('El bus x choco en la avenida x', 'Choque', '2026-05-20 15:36:00');
+INSERT INTO incidencia(id_bus,id_centro,id_pasajero,descripcion,tipo,fecha_reporte)
+VALUES  (1,1,1,'El bus x llego tarde hoy, tenia cosas importantes que hacer', 'Retraso', '2026-05-20 15:36:00'),
+        (2,2,2,'El conductor del bus x conduce muy rapido', 'Exceso de velocidad', '2026-05-21 11:16:00'),
+        (3,3,3,'El bus x no parece recibir mantenimiento', 'Bus en mal estado', '2026-05-21 08:10:00'),
+        (4,4,4,'El conductor del bus x parecia estar en estado de ebriedad', 'Conductor en mal estado', '2026-05-23 10:50:00'),
+        (5,5,5,'El bus x choco en la avenida x', 'Choque', '2026-05-20 15:36:00');
 
 --tabla registro_control
-INSERT INTO registro_control(fecha_hora,retraso_minutos,observacion)
-VALUES  ('2026-05-20 06:59:00',-1, 'Llego temprano'),
-        ('2026-05-20 08:15:00',15, 'Se retraso por el trafico'),
-        ('2026-05-21 10:20:00',20, 'Se retraso por el cambio de ruta'),
-        ('2026-05-21 12:00:00',0, 'Llego a tiempo'),
-        ('2026-05-22 19:00:00',120, 'Choco y tuvo que regresar a la base');
+INSERT INTO registro_control(id_bus,id_centro,fecha_hora,retraso_minutos,observacion)
+VALUES  (1,1,'2026-05-20 06:59:00',-1, 'Llego temprano'),
+        (2,2,'2026-05-20 08:15:00',15, 'Se retraso por el trafico'),
+        (3,3,'2026-05-21 10:20:00',20, 'Se retraso por el cambio de ruta'),
+        (4,4,'2026-05-21 12:00:00',0, 'Llego a tiempo'),
+        (5,5,'2026-05-22 19:00:00',120, 'Choco y tuvo que regresar a la base');
 
 
 -- #UPDATE Y WHERE DE TABLAS
