@@ -1,6 +1,5 @@
-
-
 -- #TABLAS INDEPENDIENTES
+
 -- tabla  EMPRESA_TRANSPORTE
 INSERT INTO empresa_transporte(nombre, ruc, telefono, correo) 
 VALUES  ('SantaClara', '12345678901', '987654321', 'aqpbus@SantaClara.com'),
@@ -55,19 +54,47 @@ VALUES  ('Paradero UNSA', 'Av. Independencia 500', 'Puerta principal de la UNSA'
         ('Paradero Estadio', 'Av. Independencia 400', 'Frente al Estadio Melgar'),
         ('Paradero Hospital', 'Av. Goyeneche 600', 'Entrada principal del Hospital Goyeneche');
 
---TABLAS DEPENDIENTES
---tabla BUS
-INSERT INTO bus(placa, capacidad, estado)
-VALUES  ('A1A-321', 20, 'Partio'),
-        ('A2A-320', 20, 'En base'),
-        ('A3A-319', 30, 'Partio'),
-        ('A1B-318', 25, 'Partio'),
-        ('A2B-219', 20, 'En base'),
-        ('A3B-210', 20, 'Accidentado'),
-        ('B1A-230', 30, 'Partio'),
-        ('B2A-101', 25, 'Partio');
 
--- UPDATE Y WHERE DE TABLAS
+-- #TABLAS DEPENDIENTES
+
+--tabla ruta
+INSERT INTO ruta(nombre_ruta, codigo_ruta, tiempo_estimado, id_empresa)
+VALUES
+('Ruta Centro - Cayma', 'R001', 45, 1),
+('Ruta Paucarpata - Cercado', 'R002', 35, 2),
+('Ruta Yanahuara - Socabaya', 'R003', 50, 3),
+('Ruta Mariano Melgar - Centro', 'R004', 40, 4),
+('Ruta Cerro Colorado - UNSA', 'R005', 55, 5);
+
+--tabla bus
+INSERT INTO bus(placa, capacidad, estado, id_empresa, id_terminal)
+VALUES
+('V8A-123', 40, 'Activo', 1, 1),
+('C7B-456', 35, 'Activo', 2, 2),
+('M9D-789', 50, 'Mantenimiento', 3, 3),
+('P1F-321', 45, 'Activo', 4, 4),
+('X5G-654', 30, 'Inactivo', 5, 5);
+
+--tabla horario
+INSERT INTO horario(hora_salida, hora_llegada, frecuencia, id_ruta)
+VALUES
+('06:00', '06:45', '15 minutes', 1),
+('07:00', '07:35', '20 minutes', 2),
+('08:00', '08:50', '25 minutes', 3),
+('09:00', '09:40', '30 minutes', 4),
+('10:00', '10:55', '15 minutes', 5);
+
+--tabla notificacion
+INSERT INTO notificacion
+(id_centro, id_pasajero, mensaje, fecha_envio, tipo)
+VALUES
+(1, 1, 'Retraso en la ruta R001', '2026-05-20 08:30:00', 'Retraso'),
+(2, 2, 'Desvío temporal por tráfico', '2026-05-20 09:00:00', 'Aviso'),
+(3, 3, 'Ruta restablecida', '2026-05-20 09:30:00', 'Informativo'),
+(4, 4, 'Cambio de horario', '2026-05-20 10:00:00', 'Horario'),
+(5, 5, 'Bus fuera de servicio', '2026-05-20 11:00:00', 'Incidencia');
+
+-- #UPDATE Y WHERE DE TABLAS
 --UPDATE'S DE EMPRESA_TRANSPORTE
 UPDATE empresa_transporte 
 SET telefono = '900111222' 
@@ -109,18 +136,16 @@ WHERE nombres = 'Anuel Gómez';
 
 --UPDATE'S DE BUS
 UPDATE bus
-SET estado = "En base"
-WHERE placa = "A3B-210";
+SET estado = 'Mantenimiento'
+WHERE placa = 'V8A-123';
 
 UPDATE bus
-SET capacidad = 10
-WHERE placa = "A3B-210";
+SET capacidad = 45
+WHERE id_bus = 2;
 
 UPDATE bus
-SET estado = "Partio"
-WHERE placa = "A2B-320";
- 
-
+SET id_terminal = 3
+WHERE placa = 'M9D-789';
 
 
 
