@@ -33,10 +33,10 @@ CREATE TABLE bus (
     CONSTRAINT UK_bus_placa UNIQUE (placa),
     CONSTRAINT FK_bus_empresa 
         FOREIGN KEY (id_empresa) 
-        REFERENCES EMPRESA_TRANSPORTE(id_empresa),
+        REFERENCES empresa_transporte(id_empresa),
     CONSTRAINT FK_bus_terminal 
         FOREIGN KEY (id_terminal) 
-        REFERENCES TERMINAL(id_terminal)
+        REFERENCES terminal(id_terminal)
 );
 
 --tabla ubicacion_bus (Depende de bus)
@@ -100,7 +100,7 @@ CREATE TABLE conductor (
 CREATE TABLE notificacion (
     id_notificacion SERIAL
         CONSTRAINT pk_ntfccn_id_ntfccn PRIMARY KEY,
-    id_centro SMALLSERIAL NOT NULL,
+    id_centro SMALLINT NOT NULL,
     id_pasajero INT NOT NULL,
     mensaje TEXT NOT NULL,
     fecha_envio TIMESTAMP NOT NULL,
@@ -125,11 +125,11 @@ CREATE TABLE paradero (
 
 -- tabla recorrido_ruta (Depende de ruta y paradero)
 CREATE TABLE recorrido_ruta (
-    id_recorrido SMALLSERIAL,
+    id_recorrido SERIAL,
     orden_paradero INT NOT NULL,
     tiempo_llegada_estimado INTERVAL,
     id_ruta INT NOT NULL,
-    id_paradero SMALLSERIAL NOT NULL,
+    id_paradero SMALLINT NOT NULL,
     PRIMARY KEY (id_recorrido),
     CONSTRAINT fk_recorrido_ruta
         FOREIGN KEY (id_ruta)
