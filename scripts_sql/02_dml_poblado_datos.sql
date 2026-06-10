@@ -75,11 +75,11 @@ VALUES  ('V8A-123', 40, 'Activo', 1, 1),
 
 --tabla horario
 INSERT INTO horario(hora_salida, hora_llegada, frecuencia, id_ruta)
-VALUES  ('06:00', '06:45', '15 minutes', 1),
-        ('07:00', '07:35', '20 minutes', 2),
-        ('08:00', '08:50', '25 minutes', 3),
-        ('09:00', '09:40', '30 minutes', 4),
-        ('10:00', '10:55', '15 minutes', 5);
+VALUES  ('06:00', '06:45', INTERVAL '15 minutes', 1),
+        ('07:00', '07:35', INTERVAL '20 minutes', 2),
+        ('08:00', '08:50', INTERVAL '25 minutes', 3),
+        ('09:00', '09:40', INTERVAL '30 minutes', 4),
+        ('10:00', '10:55', INTERVAL '15 minutes', 5);
 
 --tabla notificacion
 INSERT INTO notificacion(id_centro, id_pasajero, mensaje, fecha_envio, tipo)
@@ -177,5 +177,5 @@ SET turno = 'Tarde'
 WHERE id_conductor = 1;
 
 UPDATE asignacion_conductor
-SET estado = 'Sin conductor'
+SET estado = 'Suspendido'
 WHERE id_bus = 4;
