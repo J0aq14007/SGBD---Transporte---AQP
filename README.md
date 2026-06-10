@@ -1,8 +1,7 @@
 # Integrantes del grupo
-- Joaquin Arenas Riveros
-- Piero Coaguila Sanchez
-- Adriano Guetat Concha
-
+- Joaquin Arenas Riveros (J0aq14007)
+- Piero Coaguila Sanchez (Piero-CS)
+- Adriano Guetat Concha (Guet4t)
 
 ## Entidades del modelo
 
