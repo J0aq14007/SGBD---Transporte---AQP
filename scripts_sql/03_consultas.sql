@@ -22,9 +22,8 @@ GROUP BY i.tipo
 HAVING COUNT(i.id_incidencia) >= 2
 ORDER BY total_reportes DESC;
 
-
-
 -- Consulta 3
+-- Muestra los buses con retraso y calcula un retraso ajustado sumando 10 minutos
 SELECT
     b.placa AS placa_bus,
     r.retraso_minutos AS retraso_original,
@@ -35,6 +34,7 @@ JOIN registro_control r
 WHERE r.retraso_minutos > 0;
 
 -- Consulta 4
+-- Muestra las incidencias y el promedio de retrasos por empresa de transporte
 SELECT
     e.nombre AS empresa,
     COUNT(i.id_incidencia) AS total_incidencias,
