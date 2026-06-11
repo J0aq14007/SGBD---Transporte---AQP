@@ -1,4 +1,14 @@
 -- Consulta 1
+-- Lista los conductores que han tenido más de una asignación, ordenados por cantidad.
+SELECT
+    c.nombres AS nombre_conductor,
+    COUNT(ac.id_asignacion) AS total_asignaciones
+FROM conductor c
+JOIN asignacion_conductor ac
+    ON c.id_conductor = ac.id_conductor
+GROUP BY c.nombres
+HAVING COUNT(ac.id_asignacion) > 1
+ORDER BY total_asignaciones DESC;
 
 
 -- Consulta 2
