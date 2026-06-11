@@ -12,6 +12,16 @@ ORDER BY total_asignaciones DESC;
 
 
 -- Consulta 2
+--Muestra los tipos de incidencias que se repiten al menos dos veces, 
+--ordenados de mayor a menor frecuencia.
+SELECT
+    i.tipo AS tipo_incidencia,
+    COUNT(i.id_incidencia) AS total_reportes
+FROM incidencia i
+GROUP BY i.tipo
+HAVING COUNT(i.id_incidencia) >= 2
+ORDER BY total_reportes DESC;
+
 
 
 -- Consulta 3
