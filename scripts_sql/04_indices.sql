@@ -1,42 +1,47 @@
---ANtes: Seq Scan on pasajero
+--  1. Pasajeros Sec Scan
 EXPLAIN ANALYZE
 SELECT *
 FROM pasajero
-WHERE dni = '12345678';
+WHERE correo = 'lucia.torres@mail.com';
 
-CREATE INDEX idx_pasajero_dni
-ON pasajero(dni);
---Despues: Index Scan using idx_pasajero_dni
+-- Crear indice pasajero_correo
+CREATE INDEX idx_pasajero_correo
+ON pasajero(correo);
+
+-- Pasajeros Index Scan
 EXPLAIN ANALYZE
 SELECT *
 FROM pasajero
-WHERE dni = '12345678';
+WHERE correo = 'lucia.torres@mail.com';
 
---ANtes: Seq Scan on bus	
+-- 2. Bus Sec Scan	
 EXPLAIN ANALYZE
 SELECT *
 FROM bus
-WHERE placa = 'ABC-123';
+WHERE placa = 'V8A-123';
 
+-- Crear indice bus_placa
 CREATE INDEX idx_bus_placa
 ON bus(placa);
---Despues: Index Scan using idx_bus_placa
+
+-- Bus Index Scan
 EXPLAIN ANALYZE
 SELECT *
 FROM bus
-WHERE placa = 'ABC-123';
+WHERE placa = 'V8A-123';
 
-----ANtes: Seq Scan on viaje
-
+-- 3. Incidencias Sec Scan
 EXPLAIN ANALYZE
 SELECT *
-FROM viaje
-WHERE fecha_salida = '2026-06-01';
+FROM incidencia
+WHERE tipo = 'Choque';
 
-CREATE INDEX idx_viaje_fecha_salida
-ON viaje(fecha_salida);
---Despues: Index Scan using idx_viaje_fecha_salida
+-- Crear indice incidencia_tipo
+CREATE INDEX idx_incidencia_tipo
+ON incidencia(tipo);
+
+-- Incidencia Index Scan
 EXPLAIN ANALYZE
 SELECT *
-FROM viaje
-WHERE fecha_salida = '2026-06-01';
+FROM incidencia
+WHERE tipo = 'Choque';
