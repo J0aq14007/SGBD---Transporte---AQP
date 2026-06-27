@@ -1,5 +1,3 @@
-CREATE DATABASE SISTEMA_DE_GESTION_DE_TRANSPORTE_AQP;
-
 -- tabla empresa_transporte (Independiente)
 CREATE TABLE empresa_transporte (
     id_empresa SMALLSERIAL,

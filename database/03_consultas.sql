@@ -1,5 +1,5 @@
 -- Consulta 1
--- Lista los conductores que han tenido más de una asignación, ordenados por cantidad.
+-- Lista los conductores que han tenido más o una asignación, ordenados por cantidad.
 SELECT
     c.nombres AS nombre_conductor,
     COUNT(ac.id_asignacion) AS total_asignaciones
@@ -7,19 +7,19 @@ FROM conductor c
 JOIN asignacion_conductor ac
     ON c.id_conductor = ac.id_conductor
 GROUP BY c.nombres
-HAVING COUNT(ac.id_asignacion) > 1
+HAVING COUNT(ac.id_asignacion) >= 1
 ORDER BY total_asignaciones DESC;
 
 
 -- Consulta 2
---Muestra los tipos de incidencias que se repiten al menos dos veces, 
+--Muestra los tipos de incidencias que se repiten al menos una vez, 
 --ordenados de mayor a menor frecuencia.
 SELECT
     i.tipo AS tipo_incidencia,
     COUNT(i.id_incidencia) AS total_reportes
 FROM incidencia i
 GROUP BY i.tipo
-HAVING COUNT(i.id_incidencia) >= 2
+HAVING COUNT(i.id_incidencia) >= 1
 ORDER BY total_reportes DESC;
 
 -- Consulta 3
