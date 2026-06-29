@@ -206,7 +206,42 @@ def crear_pasajero(pasajero: Pasajero):
         db.close()
     return {"mensaje": "Pasajero registrado"}
 
+@app.put("/pasajeros/{id_pasajero}")
+def editar_pasajero(id_pasajero: int, pasajero: Pasajero):
+    db = SessionLocal()
+    try:
+        result = db.execute(text("""
+            UPDATE pasajero SET nombres=:nombres, correo=:correo, telefono=:telefono
+            WHERE id_pasajero=:id
+        """), {**pasajero.model_dump(), "id": id_pasajero})
+        db.commit()
+        if result.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Pasajero no encontrado")
+    except HTTPException:
+        raise
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        db.close()
+    return {"mensaje": "Pasajero actualizado"}
 
+@app.delete("/pasajeros/{id_pasajero}")
+def eliminar_pasajero(id_pasajero: int):
+    db = SessionLocal()
+    try:
+        result = db.execute(text("DELETE FROM pasajero WHERE id_pasajero=:id"), {"id": id_pasajero})
+        db.commit()
+        if result.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Pasajero no encontrado")
+    except HTTPException:
+        raise
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        db.close()
+    return {"mensaje": "Pasajero eliminado"}
 
 # ═════════════════════════════════════════════════════════════════════════════
 # INCIDENCIAS
