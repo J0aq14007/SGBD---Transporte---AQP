@@ -252,7 +252,7 @@ async function renderTable(page) {
 
   c.innerHTML = `
     <div class="toolbar">
-      ${cfg.crud ? `<button class="btn btn-primary" onclick='openCreate("${page}")'>+ Nuevo</button>` : ''}
+      ${cfg.crud ? `<button class="btn btn-primary" onclick='openCreate("${page}")'>+ Nuevo</button> <button class="btn btn-blue" onclick="exportCSV("${page}")'> Exportar CSV </button> ` : ''}
       <input class="search-box" type="text" placeholder="Buscar..." oninput="filterTable(this.value)">
       <span style="color:var(--text-muted);font-size:12px">${data.length} registros ${readonlyTag}</span>
     </div>
