@@ -607,6 +607,26 @@ def reporte_conductores():
     db.close()
     return datos
 
+@app.get("/reportes/conductores/csv")
+def reporte_conductores_csv():
+    db = SessionLocal()
+    resultado = db.execute(text("""
+        SELECT
+            c.nombres AS nombre_conductor,
+            c.licencia,
+            b.placa AS bus_asignado,
+            COUNT(ac.id_asignacion) AS total_asignaciones
+        FROM conductor c
+        JOIN asignacion_conductor ac ON c.id_conductor = ac.id_conductor
+        JOIN bus b ON ac.id_bus = b.id_bus
+        GROUP BY c.nombres, c.licencia, b.placa
+        HAVING COUNT(ac.id_asignacion) >= 1
+        ORDER BY total_asignaciones DESC
+    """))
+    datos = rows_to_list(resultado)
+    db.close()
+    return exportar_csv("conductores",datos)
+
 # Reporte 2: incidencia + bus + empresa_transporte
 @app.get("/reportes/incidencias")
 def reporte_incidencias():
