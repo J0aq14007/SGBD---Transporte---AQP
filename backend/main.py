@@ -79,6 +79,19 @@ def listar_buses():
     db.close()
     return datos
 
+@app.get("/buses/cvs")
+def exportar_buses_csv():
+    db = SessionLocal()
+
+    resultado = db.execute(text("""
+        SELECT *
+        FROM bus
+        ORDER BY id_bus         """))
+    
+    datos = rows_to_list(resultado)
+    db.close()
+    return exportar_csv("buses", datos)
+
 @app.get("/buses/{id_bus}")
 def obtener_bus(id_bus: int):
     db = SessionLocal()
