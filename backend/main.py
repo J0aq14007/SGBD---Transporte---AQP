@@ -625,7 +625,7 @@ def reporte_conductores_csv():
     """))
     datos = rows_to_list(resultado)
     db.close()
-    return exportar_csv("conductores",datos)
+    return exportar_csv("reporte_conductores",datos)
 
 # Reporte 2: incidencia + bus + empresa_transporte
 @app.get("/reportes/incidencias")
@@ -664,7 +664,7 @@ def reporte_incidencias_csv():
     """))
     datos = rows_to_list(resultado)
     db.close()
-    return exportar_csv("incidencias",datos)
+    return exportar_csv("reporte_incidencias",datos)
 
 
 # Reporte 3: bus + registro_control + empresa_transporte
@@ -687,6 +687,27 @@ def reporte_retrasos():
     datos = rows_to_list(resultado)
     db.close()
     return datos
+
+@app.get("/reportes/retrasos/csv")
+def reporte_retrasos_csv():
+    db = SessionLocal()
+    resultado = db.execute(text("""
+        SELECT
+            b.placa AS placa_bus,
+            e.nombre AS empresa,
+            r.retraso_minutos AS retraso_original,
+            r.retraso_minutos + 10 AS retraso_ajustado,
+            r.observacion
+        FROM bus b
+        JOIN registro_control r ON b.id_bus = r.id_bus
+        JOIN empresa_transporte e ON b.id_empresa = e.id_empresa
+        WHERE r.retraso_minutos > 0
+        ORDER BY r.retraso_minutos DESC
+    """))
+    datos = rows_to_list(resultado)
+    db.close()
+    return exportar_csv("reporte_retrasos",datos)
+
 
 # Reporte 4: empresa_transporte + bus + incidencia + registro_control
 @app.get("/reportes/empresas")
