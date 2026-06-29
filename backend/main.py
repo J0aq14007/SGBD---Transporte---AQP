@@ -252,7 +252,43 @@ def crear_incidencia(incidencia: Incidencia):
         db.close()
     return {"mensaje": "Incidencia registrada"}
 
+@app.put("/incidencias/{id_incidencia}")
+def editar_incidencia(id_incidencia: int, incidencia: Incidencia):
+    db = SessionLocal()
+    try:
+        result = db.execute(text("""
+            UPDATE incidencia SET id_bus=:id_bus, id_centro=:id_centro,
+            id_pasajero=:id_pasajero, descripcion=:descripcion, tipo=:tipo
+            WHERE id_incidencia=:id
+        """), {**incidencia.model_dump(), "id": id_incidencia})
+        db.commit()
+        if result.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Incidencia no encontrada")
+    except HTTPException:
+        raise
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        db.close()
+    return {"mensaje": "Incidencia actualizada"}
 
+@app.delete("/incidencias/{id_incidencia}")
+def eliminar_incidencia(id_incidencia: int):
+    db = SessionLocal()
+    try:
+        result = db.execute(text("DELETE FROM incidencia WHERE id_incidencia=:id"), {"id": id_incidencia})
+        db.commit()
+        if result.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Incidencia no encontrada")
+    except HTTPException:
+        raise
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        db.close()
+    return {"mensaje": "Incidencia eliminada"}
 
 # ═════════════════════════════════════════════════════════════════════════════
 # EMPRESAS
