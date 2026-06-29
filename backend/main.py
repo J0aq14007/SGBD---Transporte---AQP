@@ -729,3 +729,24 @@ def reporte_empresas():
     datos = rows_to_list(resultado)
     db.close()
     return datos
+
+@app.get("/reportes/empresas/csv")
+def reporte_empresas_csv():
+    db = SessionLocal()
+    resultado = db.execute(text("""
+        SELECT
+            e.nombre AS empresa,
+            COUNT(DISTINCT i.id_incidencia) AS total_incidencias,
+            ROUND(AVG(rc.retraso_minutos)::numeric, 2) AS promedio_retraso_min
+        FROM empresa_transporte e
+        JOIN bus b ON e.id_empresa = b.id_empresa
+        JOIN incidencia i ON b.id_bus = i.id_bus
+        JOIN registro_control rc ON b.id_bus = rc.id_bus
+        GROUP BY e.nombre
+        HAVING COUNT(DISTINCT i.id_incidencia) >= 1
+        ORDER BY total_incidencias DESC
+    """))
+    datos = rows_to_list(resultado)
+    db.close()
+    return exportar_csv("reporte_empresas",datos)
+
