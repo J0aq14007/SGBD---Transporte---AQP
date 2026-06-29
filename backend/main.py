@@ -454,6 +454,19 @@ def listar_empresas():
     db.close()
     return datos
 
+@app.get("/empresas/cvs")
+def exportar_empresas_csv():
+    db = SessionLocal()
+
+    resultado = db.execute(text("""
+        SELECT *
+        FROM empresa
+        ORDER BY id_empresa     """))
+    
+    datos = rows_to_list(resultado)
+    db.close()
+    return exportar_csv("empresas", datos)
+
 @app.get("/empresas/{id_empresa}")
 def obtener_empresa(id_empresa: int):
     db = SessionLocal()
