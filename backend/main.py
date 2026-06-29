@@ -297,6 +297,42 @@ def crear_empresa(empresa: Empresa):
         db.close()
     return {"mensaje": "Empresa registrada"}
 
+@app.put("/empresas/{id_empresa}")
+def editar_empresa(id_empresa: int, empresa: Empresa):
+    db = SessionLocal()
+    try:
+        result = db.execute(text("""
+            UPDATE empresa_transporte SET nombre=:nombre, ruc=:ruc,
+            telefono=:telefono, correo=:correo WHERE id_empresa=:id
+        """), {**empresa.model_dump(), "id": id_empresa})
+        db.commit()
+        if result.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Empresa no encontrada")
+    except HTTPException:
+        raise
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        db.close()
+    return {"mensaje": "Empresa actualizada"}
+
+@app.delete("/empresas/{id_empresa}")
+def eliminar_empresa(id_empresa: int):
+    db = SessionLocal()
+    try:
+        result = db.execute(text("DELETE FROM empresa_transporte WHERE id_empresa=:id"), {"id": id_empresa})
+        db.commit()
+        if result.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Empresa no encontrada")
+    except HTTPException:
+        raise
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        db.close()
+    return {"mensaje": "Empresa eliminada"}
 
 # ═════════════════════════════════════════════════════════════════════════════
 # SOLO LECTURA
