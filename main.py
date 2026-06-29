@@ -17,6 +17,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def inicio():
+    return {
+        "mensaje": "Sistema de Transporte AQP funcionando"
+    }
+
 # ─────────────────────────────────────────────
 # MODELOS (estructura de los datos que recibe cada endpoint)
 # ─────────────────────────────────────────────

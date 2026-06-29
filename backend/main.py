@@ -79,7 +79,7 @@ def listar_buses():
     db.close()
     return datos
 
-@app.get("/buses/cvs")
+@app.get("/buses/csv")
 def exportar_buses_csv():
     db = SessionLocal()
 
@@ -173,7 +173,7 @@ def listar_conductores():
     db.close()
     return datos
 
-@app.get("/conductores/cvs")
+@app.get("/conductores/csv")
 def exportar_conductores_csv():
     db = SessionLocal()
 
@@ -266,7 +266,7 @@ def listar_pasajeros():
     db.close()
     return datos
 
-@app.get("/pasajeros/cvs")
+@app.get("/pasajeros/csv")
 def exportar_pasajeros_csv():
     db = SessionLocal()
 
@@ -360,7 +360,7 @@ def listar_incidencias():
     db.close()
     return datos
 
-@app.get("/incidencias/cvs")
+@app.get("/incidencias/csv")
 def exportar_incidencias_csv():
     db = SessionLocal()
 
@@ -454,13 +454,13 @@ def listar_empresas():
     db.close()
     return datos
 
-@app.get("/empresas/cvs")
+@app.get("/empresas/csv")
 def exportar_empresas_csv():
     db = SessionLocal()
 
     resultado = db.execute(text("""
         SELECT *
-        FROM empresa
+        FROM empresa_transporte
         ORDER BY id_empresa     """))
     
     datos = rows_to_list(resultado)
