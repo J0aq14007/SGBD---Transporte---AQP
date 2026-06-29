@@ -647,6 +647,26 @@ def reporte_incidencias():
     db.close()
     return datos
 
+@app.get("/reportes/incidencias/csv")
+def reporte_incidencias_csv():
+    db = SessionLocal()
+    resultado = db.execute(text("""
+        SELECT
+            i.tipo AS tipo_incidencia,
+            e.nombre AS empresa,
+            COUNT(i.id_incidencia) AS total_reportes
+        FROM incidencia i
+        JOIN bus b ON i.id_bus = b.id_bus
+        JOIN empresa_transporte e ON b.id_empresa = e.id_empresa
+        GROUP BY i.tipo, e.nombre
+        HAVING COUNT(i.id_incidencia) >= 1
+        ORDER BY total_reportes DESC
+    """))
+    datos = rows_to_list(resultado)
+    db.close()
+    return exportar_csv("incidencias",datos)
+
+
 # Reporte 3: bus + registro_control + empresa_transporte
 @app.get("/reportes/retrasos")
 def reporte_retrasos():
