@@ -373,6 +373,11 @@ async function deleteRecord(page, id) {
   }
 }
 
+function exportCSV(page){
+  const endpoint = PAGE[page].endpoint + "/csv";
+  window.open(API + endpoint, "_blank");
+}
+
 // ── REPORTES ──────────────────────────────────────────────────────────────────
 function renderReportes() {
   const c = document.getElementById('content');
