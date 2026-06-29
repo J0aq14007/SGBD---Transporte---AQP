@@ -163,6 +163,43 @@ def crear_conductor(conductor: Conductor):
         db.close()
     return {"mensaje": "Conductor registrado"}
 
+@app.put("/conductores/{id_conductor}")
+def editar_conductor(id_conductor: int, conductor: Conductor):
+    db = SessionLocal()
+    try:
+        result = db.execute(text("""
+            UPDATE conductor SET nombres=:nombres, licencia=:licencia,
+            telefono=:telefono, fecha_ingreso=:fecha_ingreso
+            WHERE id_conductor=:id
+        """), {**conductor.model_dump(), "id": id_conductor})
+        db.commit()
+        if result.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Conductor no encontrado")
+    except HTTPException:
+        raise
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        db.close()
+    return {"mensaje": "Conductor actualizado"}
+
+@app.delete("/conductores/{id_conductor}")
+def eliminar_conductor(id_conductor: int):
+    db = SessionLocal()
+    try:
+        result = db.execute(text("DELETE FROM conductor WHERE id_conductor=:id"), {"id": id_conductor})
+        db.commit()
+        if result.rowcount == 0:
+            raise HTTPException(status_code=404, detail="Conductor no encontrado")
+    except HTTPException:
+        raise
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        db.close()
+    return {"mensaje": "Conductor eliminado"}
 
 # ═════════════════════════════════════════════════════════════════════════════
 # PASAJEROS
