@@ -173,6 +173,19 @@ def listar_conductores():
     db.close()
     return datos
 
+@app.get("/conductores/cvs")
+def exportar_conductores_csv():
+    db = SessionLocal()
+
+    resultado = db.execute(text("""
+        SELECT *
+        FROM conductor
+        ORDER BY id_conductor  """))
+    
+    datos = rows_to_list(resultado)
+    db.close()
+    return exportar_csv("conductores", datos)
+
 @app.get("/conductores/{id_conductor}")
 def obtener_conductor(id_conductor: int):
     db = SessionLocal()
