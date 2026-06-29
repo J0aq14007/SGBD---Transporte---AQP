@@ -266,6 +266,19 @@ def listar_pasajeros():
     db.close()
     return datos
 
+@app.get("/pasajeros/cvs")
+def exportar_pasajeros_csv():
+    db = SessionLocal()
+
+    resultado = db.execute(text("""
+        SELECT *
+        FROM pasajero
+        ORDER BY id_pasajero   """))
+    
+    datos = rows_to_list(resultado)
+    db.close()
+    return exportar_csv("pasajeros", datos)
+
 @app.get("/pasajeros/{id_pasajero}")
 def obtener_pasajero(id_pasajero: int):
     db = SessionLocal()
