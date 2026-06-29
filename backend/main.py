@@ -360,6 +360,19 @@ def listar_incidencias():
     db.close()
     return datos
 
+@app.get("/incidencias/cvs")
+def exportar_incidencias_csv():
+    db = SessionLocal()
+
+    resultado = db.execute(text("""
+        SELECT *
+        FROM incidencia
+        ORDER BY id_incidencia         """))
+    
+    datos = rows_to_list(resultado)
+    db.close()
+    return exportar_csv("incidencias", datos)
+
 @app.get("/incidencias/{id_incidencia}")
 def obtener_incidencia(id_incidencia: int):
     db = SessionLocal()
