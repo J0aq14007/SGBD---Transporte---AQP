@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Transporte AQP</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <h1>🚌 TransporteAQP</h1>
+    <p>Sistema de Gestión</p>
+  </div>
+
+  <div class="sidebar-section">Principal</div>
+  <button class="nav-item active" onclick="navigate('dashboard')"><span class="icon">🏠</span> Dashboard</button>
+
+  <div class="sidebar-section">CRUD completo</div>
+  <button class="nav-item" onclick="navigate('buses')"><span class="icon">🚌</span> Buses</button>
+  <button class="nav-item" onclick="navigate('conductores')"><span class="icon">👤</span> Conductores</button>
+  <button class="nav-item" onclick="navigate('pasajeros')"><span class="icon">🧑</span> Pasajeros</button>
+  <button class="nav-item" onclick="navigate('incidencias')"><span class="icon">⚠️</span> Incidencias</button>
+  <button class="nav-item" onclick="navigate('empresas')"><span class="icon">🏢</span> Empresas</button>
+
+  <div class="sidebar-section">Solo lectura</div>
+  <button class="nav-item" onclick="navigate('rutas')"><span class="icon">🗺️</span> Rutas</button>
+  <button class="nav-item" onclick="navigate('terminales')"><span class="icon">🏛️</span> Terminales</button>
+  <button class="nav-item" onclick="navigate('paraderos')"><span class="icon">📍</span> Paraderos</button>
+  <button class="nav-item" onclick="navigate('horarios')"><span class="icon">🕐</span> Horarios</button>
+  <button class="nav-item" onclick="navigate('notificaciones')"><span class="icon">🔔</span> Notificaciones</button>
+  <button class="nav-item" onclick="navigate('registro-control')"><span class="icon">📝</span> Registros Control</button>
+
+  <div class="sidebar-section">Análisis</div>
+  <button class="nav-item" onclick="navigate('reportes')"><span class="icon">📊</span> Reportes</button>
+</nav>
+
+<div id="main">
+  <div id="topbar">
+    <h2 id="page-title">Dashboard</h2>
+    <span id="api-status">🟡 Conectando a FastAPI...</span>
+  </div>
+  <div id="content">
+    <div class="loading"><span class="spinner"></span> Cargando...</div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Formulario</h3>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-edit" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" id="modal-save" onclick="saveRecord()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
