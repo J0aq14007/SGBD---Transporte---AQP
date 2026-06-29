@@ -4,6 +4,9 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from pydantic import BaseModel
 from typing import Optional
+import csv
+from io import StringIO
+from fastapi.responses import StreamingResponse
 
 app = FastAPI(title="Sistema de Transporte AQP")
 
@@ -30,6 +33,26 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # ─────────────────────────────────────────────────────────────────────────────
 def rows_to_list(resultado):
     return [dict(fila._mapping) for fila in resultado]
+
+def exportar_csv(nombre_archivo: str, datos: list):
+    if not datos:
+        raise HTTPException(status_code=404, detail="No hay datos")
+
+    output = StringIO()
+
+    writer = csv.DictWriter(output, fieldnames=datos[0].keys())
+    writer.writeheader()
+    writer.writerows(datos)
+
+    output.seek(0)
+
+    return StreamingResponse(
+        output,
+        media_type="text/csv",
+        headers={
+            "Content-Disposition": f"attachment; filename={nombre_archivo}.csv"
+        }
+    )
 
 # ─────────────────────────────────────────────────────────────────────────────
 # ROOT
